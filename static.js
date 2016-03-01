@@ -58,6 +58,7 @@ http.createServer(function(request, response) {
             var jsonLength = jsonContent.length;
             var result = []
 
+            // Get all tweets' id, created_at, and text fields.
             for (var i=0; i <= jsonLength - 1; i++) {
                 result.push({
                     'id': jsonContent[i].id,
@@ -84,6 +85,7 @@ http.createServer(function(request, response) {
             var result = []
             var include_ids = []
 
+            // Get all tweet user and the mention user. Use isNotEmpty function to check the null field.
             for (var i=0; i <= jsonLength - 1; i++) {
                 if (isNotEmpty(jsonContent[i].user)) {
                     var user_info = jsonContent[i].user;
@@ -124,19 +126,20 @@ http.createServer(function(request, response) {
             var jsonLength = jsonContent.length;
             var result = [];
 
+            // Use regular expression to match the url string.
             for (var i=0; i <= jsonLength-1; i++) {
                 var data = {};
                 data.id = jsonContent[i].id;
                 data.links = [];
                 var string_json = JSON.stringify(jsonContent[i]).match(/(http|https):(.*?)("|\(|\s)/g)
                 for(var j=0; j <= string_json.length-1; j++) {
+                    // format the url by replacing unwanted characters
                     string_json[j] = string_json[j].replace(/\\/g, '').replace(',', "").replace('"',"").replace('(',"").trim();
                     if (data.links.indexOf(string_json[j]) == -1) {
                         data.links.push(string_json[j]);
                     }
                 }
                 result.push(data);
-
             }
             response.writeHead(200, { "Content-Type": MIME_TYPES['json'] });  
             response.write(JSON.stringify(result));  
@@ -158,12 +161,15 @@ http.createServer(function(request, response) {
                 var jsonLength = jsonContent.length;
                 var result = []
 
+                // Get detailed tweet information
                 for (var i = 0; i <= jsonLength - 1; i++) {
                     if (jsonContent[i].id == id) {
                         result.push({
                             'id': jsonContent[i].id,
                             'created_at': jsonContent[i].created_at,
-                            'text': jsonContent[i].text
+                            'text': jsonContent[i].text,
+                            'user_id': jsonContent[i].user.id,
+                            'user_screen_name': jsonContent[i].user.screen_name
                          })
                     }
                 }
@@ -189,6 +195,7 @@ http.createServer(function(request, response) {
                 var include_ids = []
 
                 for (var i = 0; i <= jsonLength - 1; i++) {
+                    // Get use information, check both user filed and mention user field 
                     if (isNotEmpty(jsonContent[i].user)) {
                         var user_info = jsonContent[i].user;
                         if (user_info.screen_name == name) {

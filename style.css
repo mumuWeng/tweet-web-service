@@ -1,5 +1,6 @@
+/*---------- General Style ----------*/
 body {
-	font: 11px BlinkMacSystemFont;
+	font: 12px BlinkMacSystemFont;
 	
 	margin: 0 auto;
 	margin-top: 20px;
@@ -25,27 +26,12 @@ hr {
 	margin-bottom: 30px;
 }
 
+/*---------- Form Style ----------*/
 .tweet-box {
 	margin-bottom: 25px;
 }
 
-.display-box {
-	background-color: #eaf8f7;
-	width: 80%;
-	margin: 0 auto;
-	margin-top: 40px;
-	border-radius: 10px;
-	padding: 20px;
-	padding-left: 25px;
-	min-height: 350px;
-	line-height: 18px;
-}
-
 .tweet-form {
-	text-align: center;
-}
-
-.message {
 	text-align: center;
 }
 
@@ -59,6 +45,11 @@ hr {
 	display: table;
 }
 
+.submit-all-button:hover {
+	background-color: #6ea7d0; 
+}
+
+
 .submit-info-button {
 	margin: 0 auto;
 	border: 0px;
@@ -69,6 +60,10 @@ hr {
 	display: inline-block;
 }
 
+.submit-info-button:hover {
+	background-color: #3acdc1;
+}
+
 .form-control {
 	border-radius: 0px;
 	display: inline-block;
@@ -76,4 +71,25 @@ hr {
 	width: 30%;
 	margin-right: 10px;
 	margin-left: 10px;
+}
+
+/*---------- Display Style----------*/
+.display-box {
+	background-color: #eaf8f7;
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 40px;
+	border-radius: 10px;
+	padding: 20px;
+	padding-left: 25px;
+	min-height: 350px;
+	line-height: 18px;
+}
+
+.message {
+	text-align: center;
+}
+
+.button-group {
+	text-align: center;
 }

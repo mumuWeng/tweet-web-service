@@ -13,30 +13,41 @@
 			<img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/twitter-128.png" width="30px"/>
 		</h2>
 		<div class="tweet-box">
-			<input type="button" class="submit-all-button" name="all-tweets" id="all-tweets" value="Get all tweets"/>
+			<input type="button" class="submit-all-button" name="all-tweets" id="all-tweets" value="Get all tweets information"/>
 		</div>
 		<div class="tweet-box">
-			<input type="button" class="submit-all-button" name="all-users" id="all-users" value="Get all known Twitter users"/>
+			<input type="button" class="submit-all-button" name="all-users" id="all-users" value="Get all known Twitter users information"/>
 		</div>
 		<div class="tweet-box">
 			<input type="button" class="submit-all-button" name="all-links" id="all-links" value="Get all external links"/>
 		</div>
 		<div class="tweet-box">
 			<div class="tweet-form">
-				Please Enter Tweet ID:
+				Please enter tweet ID:
 				<input class="form-control" type="text" name="tweet-id" id="tweet-id"/>
 				<input type="button" class="submit-info-button" name="get-tweet-info" id="get-tweet-info" value="Get specific tweet info"/>
 			</div>
 		</div>
 		<div class="tweet-box">
 			<div class="tweet-form">
-				Please Enter User Screen Name:
+				Please enter user screen Name:
 				<input class="form-control" type="text" name="user-info" id="user-name" required>
 				<input type="button" class="submit-info-button" name="get-user-info" id="get-user-info" value="Get specific user info">
 			</div>
 		</div>
-		<div class="display-box" id="display-box">
-			<div class="message">Your serach result will be displayed here.</div>
+		<div class="display-box">
+			<div id="display">
+				<!-- Result will be displayed here -->
+				<div class="message">
+					This is a RESTful API designed to retrieve tweets informations. Please click the button above or input the tweet id or user screen name to get the desired data. <br/>	
+					Your serach result will be displayed here.
+				</div>
+			</div>
+			<div class="button-group">
+				<!-- These are the buttons for pagination -->
+				<input type="button" class="btn btn-default" id="prev-btn" name ="prev-btn" value="Previous" style="display:none;"/>
+				<input type="button" class="btn btn-default" id="next-btn" name ="next-btn" value="Next" style="display:none;"/>
+			</div>
 		</div>
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
 		<script type="text/javascript" src="app.js"></script>
