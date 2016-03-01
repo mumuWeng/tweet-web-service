@@ -13,23 +13,28 @@ Go to http://localhost:3000 for the interface.
 ## Usage
 
 * Get all tweets information in the archive.
-
-    GET /api/tweets
+```
+GET /api/tweets
+```
     
 * Get all know Twitter  users included in the archive.
-
-    GET /api/users
+```
+GET /api/users
+```
 
 * Get all external links in the archive grouped based on Tweet ID.
-
-    GET /api/external_links
+```
+GET /api/external_links
+```
     
 * Get specific tweet information. The parameter tweet's id is required.
-
-    GET /api/tweet/:id
+```
+GET /api/tweet/:id
+```
 
 * Get specific user information. The parameter user's screen name is required.
-
-    GET/api/user/:name
+```
+GET /api/user/:name
+```
 
 Happy Tweeting.
