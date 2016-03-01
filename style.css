@@ -1,12 +1,79 @@
-h3 {
+body {
+	font: 11px BlinkMacSystemFont;
+	
+	margin: 0 auto;
+	margin-top: 20px;
+	width: 90%;
+}
+
+h2 {
 	text-align: center;
 	margin: 0 auto;
 }
 
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #3082bd;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0; 
+}
+
+.title {
+	margin-bottom: 30px;
+}
+
 .tweet-box {
-	margin-bottom: 15px;
+	margin-bottom: 25px;
 }
 
 .display-box {
-	
+	background-color: #eaf8f7;
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 40px;
+	border-radius: 10px;
+	padding: 20px;
+	padding-left: 25px;
+	min-height: 350px;
+	line-height: 18px;
+}
+
+.tweet-form {
+	text-align: center;
+}
+
+.message {
+	text-align: center;
+}
+
+.submit-all-button {
+	margin:0 auto;
+	border: 0px;
+    line-height: 25px;
+    width: 30%;
+	background-color: #3082bd;
+	color: white;	
+	display: table;
+}
+
+.submit-info-button {
+	margin: 0 auto;
+	border: 0px;
+    line-height: 25px;
+    width: 20%;
+	background-color: #30BDB2;
+	color: white;	
+	display: inline-block;
+}
+
+.form-control {
+	border-radius: 0px;
+	display: inline-block;
+	height: 30px;
+	width: 30%;
+	margin-right: 10px;
+	margin-left: 10px;
 }
