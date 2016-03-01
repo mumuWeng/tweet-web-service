@@ -60,11 +60,16 @@ http.createServer(function(request, response) {
 
             // Get all tweets' id, created_at, and text fields.
             for (var i=0; i <= jsonLength - 1; i++) {
-                result.push({
-                    'id': jsonContent[i].id,
-                    'created_at': jsonContent[i].created_at,
-                    'text': jsonContent[i].text
-                })
+                var data = {};
+                data.id = jsonContent[i].id;
+                // Check not full for fields other than tweet id
+                if (jsonContent[i].created_at) {
+                    data.created_at = jsonContent[i].created_at;
+                }
+                if (jsonContent[i].text) {
+                    data.text = jsonContent[i].text;
+                }
+                result.push(data)
             }
 
             response.writeHead(200, { "Content-Type": MIME_TYPES['json']  });  
@@ -86,23 +91,31 @@ http.createServer(function(request, response) {
             var include_ids = []
 
             // Get all tweet user and the mention user. Use isNotEmpty function to check the null field.
-            for (var i=0; i <= jsonLength - 1; i++) {
-                if (isNotEmpty(jsonContent[i].user)) {
-                    var user_info = jsonContent[i].user;
-                    user = getUserInfo(user_info, include_ids);
-                    result.push(user);
-                    include_ids.push(user.id);
+            for (var i = 0; i <= jsonLength - 1; i++) {
+                // Get use information, check both user filed and mention user field 
+                if (jsonContent[i].user) {
+                    if (isNotEmpty(jsonContent[i].user)) {
+                        var user_info = jsonContent[i].user;
+                        user = getUserInfo(user_info, include_ids);
+                        result.push(user);
+                        include_ids.push(user.id);        
+                    }
                 }
 
-                if (isNotEmpty(jsonContent[i].entities)) {
-                    if (isNotEmpty(jsonContent[i].entities.user_mentions)) {
-                        var user_info = jsonContent[i].entities.user_mentions
-                        var user_length = user_info.length;
-                        if (user_length > 0) {
-                            for (var j = 0 ; j <= user_length-1; j++) {
-                                user = getUserInfo(user_info[j], include_ids)
-                                result.push(user);
-                                include_ids.push(user.id);
+                // Always make sure the filed is not null and not empty.
+                if (jsonContent[i].entities) {
+                    if (isNotEmpty(jsonContent[i].entities)) {
+                        if  (jsonContent[i].entities.user_mentions) {
+                            if (isNotEmpty(jsonContent[i].entities.user_mentions)) {
+                                var user_info = jsonContent[i].entities.user_mentions
+                                var user_length = user_info.length;
+                                if (user_length > 0) {
+                                    for (var j = 0 ; j <= user_length-1; j++) {
+                                        user = getUserInfo(user_info[j], include_ids)
+                                        result.push(user);
+                                        include_ids.push(user.id);
+                                    }
+                                }
                             }
                         }
                     }
@@ -164,13 +177,20 @@ http.createServer(function(request, response) {
                 // Get detailed tweet information
                 for (var i = 0; i <= jsonLength - 1; i++) {
                     if (jsonContent[i].id == id) {
-                        result.push({
-                            'id': jsonContent[i].id,
-                            'created_at': jsonContent[i].created_at,
-                            'text': jsonContent[i].text,
-                            'user_id': jsonContent[i].user.id,
-                            'user_screen_name': jsonContent[i].user.screen_name
-                         })
+                        var data = {};
+                        data.id = jsonContent[i].id;
+                        // Check not full for fields other than tweet id
+                        if (jsonContent[i].created_at) {
+                            data.created_at = jsonContent[i].created_at;
+                        }
+                        if (jsonContent[i].text) {
+                            data.text = jsonContent[i].text;
+                        }
+                        if (jsonContent[i].user) {
+                            data.user_id = jsonContent[i].user.id;
+                            data.user_screen_name = jsonContent[i].user.screen_name;
+                        }
+                        result.push(data)
                     }
                 }
 
@@ -196,25 +216,32 @@ http.createServer(function(request, response) {
 
                 for (var i = 0; i <= jsonLength - 1; i++) {
                     // Get use information, check both user filed and mention user field 
-                    if (isNotEmpty(jsonContent[i].user)) {
-                        var user_info = jsonContent[i].user;
-                        if (user_info.screen_name == name) {
-                            user = getUserInfo(user_info, include_ids);
-                            result.push(user);
-                            include_ids.push(user.id);
+                    if (jsonContent[i].user) {
+                        if (isNotEmpty(jsonContent[i].user)) {
+                            var user_info = jsonContent[i].user;
+                            if (user_info.screen_name == name) {
+                                user = getUserInfo(user_info, include_ids);
+                                result.push(user);
+                                include_ids.push(user.id);
+                            }
                         }
                     }
 
-                    if (isNotEmpty(jsonContent[i].entities)) {
-                        if (isNotEmpty(jsonContent[i].entities.user_mentions)) {
-                            var user_info = jsonContent[i].entities.user_mentions
-                            var user_length = user_info.length;
-                            if (user_length > 0) {
-                                for (var j = 0 ; j <= user_length-1; j++) {
-                                    if (user_info[j].screen_name == name) {
-                                        user = getUserInfo(user_info[j], include_ids)
-                                        result.push(user);
-                                        include_ids.push(user.id);
+                    // Always make sure the filed is not null and not empty.
+                    if (jsonContent[i].entities) {
+                        if (isNotEmpty(jsonContent[i].entities)) {
+                            if  (jsonContent[i].entities.user_mentions) {
+                                if (isNotEmpty(jsonContent[i].entities.user_mentions)) {
+                                    var user_info = jsonContent[i].entities.user_mentions
+                                    var user_length = user_info.length;
+                                    if (user_length > 0) {
+                                        for (var j = 0 ; j <= user_length-1; j++) {
+                                            if (user_info[j].screen_name == name) {
+                                                user = getUserInfo(user_info[j], include_ids)
+                                                result.push(user);
+                                                include_ids.push(user.id);
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -230,7 +257,7 @@ http.createServer(function(request, response) {
     }
 }).listen(3000);
 
-// This is a function to test in an hash is empty.
+// This is a function to test if an hash is empty.
 function isNotEmpty(object) {
     for (var key in object) {
         if (object.hasOwnProperty(key)) {

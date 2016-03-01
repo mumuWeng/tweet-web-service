@@ -1,4 +1,4 @@
-// These following variables are used for pagination.
+// The following variables are used for pagination.
 var page = 0; // page number 
 var type = null; // 0 for tweet, 1 for user, and 2 for external link
 var display_data = ""; // save the response data 
@@ -124,7 +124,6 @@ $(document).ready(function(){
 				$('#display').html(html);
 		}
 	});
-
 });
 
 // This function will parse the tweet information in JSON and return a html string.
@@ -246,7 +245,7 @@ function parse_link(link_info, page_num) {
 }
 
 // This function replace the data in the parsed array and control the 
-// display/hide of the previous and next button.
+// display and hide of the previous and next button.
 // Four elements will be displayed on a single page.
 function pagination (parsed_json, page_number) {
 	var start = page_number * 4

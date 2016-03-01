@@ -17,7 +17,7 @@ Go to http://localhost:3000 for the interface.
 GET /api/tweets
 ```
     
-* Get all know Twitter  users included in the archive.
+* Get all known Twitter  users included in the archive.
 ```
 GET /api/users
 ```
