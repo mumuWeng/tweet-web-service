@@ -29,12 +29,12 @@ GET /api/external_links
     
 * Get specific tweet information. The parameter tweet's id is required.
 ```
-GET /api/tweet/:id
+GET /api/tweet?id=TWEET_ID
 ```
 
 * Get specific user information. The parameter user's screen name is required.
 ```
-GET /api/user/:name
+GET /api/user?name=USER_SCREEN_NAME
 ```
 
 Happy Tweeting.
